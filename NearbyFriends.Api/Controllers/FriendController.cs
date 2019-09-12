@@ -1,9 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using NearbyFriends.Api.Controllers.Abstractions;
 using NearbyFriends.Domain.Contracts;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace NearbyFriends.Api.Controllers
 {
-    public class FriendController : Controller
+    [Authorize]
+    [Route("api/friend")]
+    public class FriendController : NearFriendsControllerBase
     {
         public FriendController(
             IUnityOfWork unityOfwork)
@@ -12,10 +19,13 @@ namespace NearbyFriends.Api.Controllers
         }
 
         private IUnityOfWork _repositories { get; set; }
-
-        public IActionResult Index()
+            
+        [HttpGet("")]
+        public async Task<ActionResult> GetFriends()
         {
-            return View();
+            var userId = CurrentUser;
+
+            return Ok();
         }
     }
 }

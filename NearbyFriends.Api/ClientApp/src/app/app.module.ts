@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { PainelComponent } from './painel/painel.component';
 
+import { AuthService } from './providers/AuthService'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,7 @@ import { PainelComponent } from './painel/painel.component';
       { path: '', component: PainelComponent, pathMatch: 'full' },
     ])
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
